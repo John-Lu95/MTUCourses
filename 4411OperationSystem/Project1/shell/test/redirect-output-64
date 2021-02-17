@@ -1,0 +1,3 @@
+valuefrom64 > test/redirect-output-64
+/bin/echo valuefrom64 > test/redirect-output-64 exit status: 0
+> 

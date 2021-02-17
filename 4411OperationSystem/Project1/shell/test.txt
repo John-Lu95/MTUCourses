@@ -1,0 +1,958 @@
+Failed test trivial command, exit status 0
+Test input:
+  /bin/true
+  exit
+Actual stdout:
+  > > /bin/true exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > .*/bin/true.*[Ee]xit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test trivial command, exit status 0 (do not check for command name)
+Test input:
+  /bin/true
+  exit
+Actual stdout:
+  > > /bin/true exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > .*[Ee]xit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test trivial command with extra space, exit status 0
+Test input:
+   /bin/true
+  exit
+Actual stdout:
+  > > /bin/true exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > .*/bin/true.*[Ee]xit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test trivial command with extra tab, exit status 0
+Test input:
+  	/bin/true
+  exit
+Actual stdout:
+  > > 	/bin/true exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > .*[Ee]xit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test trivial command with extra vertical tab, exit status 0
+Test input:
+  /bin/true
+  exit
+Actual stdout:
+  > > /bin/true exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > .*[Ee]xit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test trivial command, exit status 1
+Test input:
+  /bin/false
+  exit
+Actual stdout:
+  > > /bin/false exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > /bin/false.*[Ee]xit status: 1.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> /bin/false.*[Ee]xit status: 1.*] in line [> > /bin/false exit status: 0]
+  in stdout: could not find a match for pattern [> /bin/false.*[Ee]xit status: 1.*] in line [> ]
+  in stdout: could not find match for pattern [> /bin/false.*[Ee]xit status: 1.*] in ['> > /bin/false exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test trivial command, exit status 1 (do not check for command name)
+Test input:
+  /bin/false
+  exit
+Actual stdout:
+  > > /bin/false exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > .*[Ee]xit status: 1.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> .*[Ee]xit status: 1.*] in line [> > /bin/false exit status: 0]
+  in stdout: could not find a match for pattern [> .*[Ee]xit status: 1.*] in line [> ]
+  in stdout: could not find match for pattern [> .*[Ee]xit status: 1.*] in ['> > /bin/false exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test trivial command, exit status 1 (check for command name)
+Test input:
+  /bin/false
+  exit
+Actual stdout:
+  > > /bin/false exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > /bin/false.*[Ee]xit status: 1.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> /bin/false.*[Ee]xit status: 1.*] in line [> > /bin/false exit status: 0]
+  in stdout: could not find a match for pattern [> /bin/false.*[Ee]xit status: 1.*] in line [> ]
+  in stdout: could not find match for pattern [> /bin/false.*[Ee]xit status: 1.*] in ['> > /bin/false exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test only redirections is invalid
+Test input:
+  > foo.txt < bar.txt
+  exit
+Actual stdout:
+  > > 
+Actual stderr:
+  open error: No such file or directory
+  
+Expected stdout regular expression pattern:
+  > > 
+Expected stderr regular expression pattern:
+  .*invalid command.*
+Errors:
+  in stderr: could not find a match for pattern [.*invalid command.*] in line [open error: No such file or directory]
+  in stderr: could not find match for pattern [.*invalid command.*] in ['open error: No such file or directory']
+Failed test extra whitespace without redirects
+Test input:
+     		 /bin/echo	testing    one   two three 
+  exit
+Actual stdout:
+  > > 		 /bin/echo	testing one two three exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > testing one two three
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> testing one two three] in line [> > 		 /bin/echo	testing one two three exit status: 0]
+  in stdout: could not find a match for pattern [> testing one two three] in line [> ]
+  in stdout: could not find match for pattern [> testing one two three] in ['> > \t\t /bin/echo\ttesting one two \x0bthree exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test redirect stdin inode
+Test input:
+  /usr/bin/stat -L -c %i/%d /proc/self/fd/0 < test/input.txt
+  exit
+Actual stdout:
+  > /usr/bin/stat -L -c %i/%d /proc/self/fd/0 < test/input.txt exit status: 1
+  > 
+Actual stderr:
+  /usr/bin/stat: illegal option -- c
+  usage: stat [-FlLnqrsx] [-f format] [-t timefmt] [file ...]
+  
+Expected stdout regular expression pattern:
+  > 32587205/16777220
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> 32587205/16777220] in line [> /usr/bin/stat -L -c %i/%d /proc/self/fd/0 < test/input.txt exit status: 1]
+  in stdout: could not find a match for pattern [> 32587205/16777220] in line [> ]
+  in stdout: could not find match for pattern [> 32587205/16777220] in ['> /usr/bin/stat -L -c %i/%d /proc/self/fd/0 < test/input.txt exit status: 1', '> ']
+  in stderr: unexpected extra output [['/usr/bin/stat: illegal option -- c', 'usage: stat [-FlLnqrsx] [-f format] [-t timefmt] [file ...]']]
+Failed test redirect stdin contents
+Test input:
+  /bin/cat < test/input.txt
+  exit
+Actual stdout:
+  > This is an example input file.
+  Which has multiple lines.
+  /bin/cat < test/input.txt exit status: 1
+  > 
+Actual stderr:
+  cat: <: No such file or directory
+  
+Expected stdout regular expression pattern:
+  > This is an example input file.
+  Which has multiple lines.
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [/bin/cat < test/input.txt exit status: 1]
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [> ]
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['/bin/cat < test/input.txt exit status: 1', '> ']
+  in stderr: unexpected extra output [['cat: <: No such file or directory']]
+Failed test redirect stdout
+Test input:
+  /bin/echo testing one two three > test/redirect-stdout-output.txt
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  
+Expected stdout regular expression pattern:
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [> ]
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  error [Errno 13] Permission denied: 'test/redirect-stdout-output.txt' while reading test/redirect-stdout-output.txt
+Failed test redirect stdout does not redirect stderr
+Test input:
+  test/sample_outputs.sh > test/redirect-stdout-output.txt
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  This is the contents of stderr.
+  
+Expected stdout regular expression pattern:
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  This is the contents of stderr.
+Errors:
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [> ]
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  error [Errno 13] Permission denied: 'test/redirect-stdout-output.txt' while reading test/redirect-stdout-output.txt
+Failed test redirect in middle of command
+Test input:
+  /bin/echo testing one two > test/redirect-stdout-output.txt three 
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  
+Expected stdout regular expression pattern:
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [> ]
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  error [Errno 13] Permission denied: 'test/redirect-stdout-output.txt' while reading test/redirect-stdout-output.txt
+Failed test redirect at beginning of command
+Test input:
+  > test/redirect-stdout-output.txt /bin/echo testing one two three 
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  Permission denied
+  
+Expected stdout regular expression pattern:
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [> ]
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  in stderr: unexpected extra output [['Permission denied']]
+  error [Errno 13] Permission denied: 'test/redirect-stdout-output.txt' while reading test/redirect-stdout-output.txt
+Failed test extra whitespace in redirect at beginning
+Test input:
+    >    	test/redirect-stdout-output.txt	  /bin/echo	testing    one   two three 
+  exit
+Actual stdout:
+  > > 
+Actual stderr:
+  open error: No such file or directory
+  
+Expected stdout regular expression pattern:
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [> > ]
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> > ']
+  in stderr: unexpected extra output [['open error: No such file or directory']]
+  file test/redirect-stdout-output.txt was not created
+Failed test redirect output then use normal output
+Test input:
+  /bin/echo foo > /dev/null
+  /bin/echo bar
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  
+Expected stdout regular expression pattern:
+  > .*exit status: 0.*
+  > bar
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> .*exit status: 0.*] in line [> ]
+  in stdout: could not find match for pattern [> .*exit status: 0.*] in ['> ']
+Failed test redirect input then use normal input
+Test input:
+  /usr/bin/stat -L -c %F /proc/self/fd/0
+  /bin/cat < test/input.txt
+  /usr/bin/stat -L -c %F /proc/self/fd/0
+  exit
+Actual stdout:
+  > /usr/bin/stat -L -c %F /proc/self/fd/0 exit status: 1
+  > This is an example input file.
+  Which has multiple lines.
+  /bin/cat < test/input.txt exit status: 1
+  > /usr/bin/stat -L -c %F /proc/self/fd/0 exit status: 1
+  [plus 1 more lines, not shown]
+Actual stderr:
+  /usr/bin/stat: illegal option -- c
+  usage: stat [-FlLnqrsx] [-f format] [-t timefmt] [file ...]
+  cat: <: No such file or directory
+  /usr/bin/stat: illegal option -- c
+  usage: stat [-FlLnqrsx] [-f format] [-t timefmt] [file ...]
+  [plus 1 more lines, not shown]
+Expected stdout regular expression pattern:
+  > fifo
+  .*exit status: 0.*
+  > This is an example input file.
+  Which has multiple lines.
+  .*exit status: 0.*
+  [plus 3 more lines, not shown]
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> fifo] in line [> /usr/bin/stat -L -c %F /proc/self/fd/0 exit status: 1]
+  in stdout: could not find a match for pattern [> fifo] in line [> This is an example input file.]
+  in stdout: could not find a match for pattern [> fifo] in line [Which has multiple lines.]
+  in stdout: could not find a match for pattern [> fifo] in line [/bin/cat < test/input.txt exit status: 1]
+  in stdout: could not find a match for pattern [> fifo] in line [> /usr/bin/stat -L -c %F /proc/self/fd/0 exit status: 1]
+  [plus 3 more lines, not shown]
+Failed test redirect output truncates file
+Test input:
+  /bin/echo testing one two three > test/redirect-stdout-output.txt
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  
+Expected stdout regular expression pattern:
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+(This test also has some important extra setup code that might do something like restrict the number of file descriptors or child processes that can be created.)
+Errors:
+  in stdout: could not find a match for pattern [.*exit status: 0.*] in line [> ]
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  in created file test/redirect-stdout-output.txt: could not find a match for pattern [testing one two three] in line [testing one two three > test/redirect-stdout-output.txt]
+  in created file test/redirect-stdout-output.txt: could not find a match for pattern [testing one two three] in line [/bin/echo testing one two three > test/redirect-stdout-output.txt exit status: 0]
+  in created file test/redirect-stdout-output.txt: could not find a match for pattern [testing one two three] in line [> ]
+  [plus 1 more lines, not shown]
+Failed test echo 100 times output
+Test input:
+  /bin/echo 0
+  /bin/echo 1
+  /bin/echo 2
+  /bin/echo 3
+  /bin/echo 4
+  [plus 96 more lines, not shown]
+Actual stdout:
+  > 0
+  /bin/echo 0 exit status: 0
+  > 1
+  /bin/echo 1 exit status: 0
+  > 2
+  [plus 166 more lines, not shown]
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*0
+  .*1
+  .*2
+  .*3
+  .*4
+  [plus 95 more lines, not shown]
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*85] in ['/bin/echo 84 exit status: 0', '> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test echo 100 times exit status
+Test input:
+  /bin/echo 0
+  /bin/echo 1
+  /bin/echo 2
+  /bin/echo 3
+  /bin/echo 4
+  [plus 96 more lines, not shown]
+Actual stdout:
+  > 0
+  /bin/echo 0 exit status: 0
+  > 1
+  /bin/echo 1 exit status: 0
+  > 2
+  [plus 142 more lines, not shown]
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*exit status: 0.*
+  .*exit status: 0.*
+  .*exit status: 0.*
+  .*exit status: 0.*
+  .*exit status: 0.*
+  [plus 95 more lines, not shown]
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test 100 output redirections (with limit of 50 open files)
+Test input:
+  /bin/echo valuefrom0 > test/redirect-output-0
+  /bin/echo valuefrom1 > test/redirect-output-1
+  /bin/echo valuefrom2 > test/redirect-output-2
+  /bin/echo valuefrom3 > test/redirect-output-3
+  /bin/echo valuefrom4 > test/redirect-output-4
+  [plus 96 more lines, not shown]
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*exit status: 0.*
+  .*exit status: 0.*
+  .*exit status: 0.*
+  .*exit status: 0.*
+  .*exit status: 0.*
+  [plus 95 more lines, not shown]
+Expected stderr regular expression pattern:
+  <empty>
+(This test also has some important extra setup code that might do something like restrict the number of file descriptors or child processes that can be created.)
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+  error [Errno 13] Permission denied: 'test/redirect-output-0' while reading test/redirect-output-0
+  error [Errno 13] Permission denied: 'test/redirect-output-1' while reading test/redirect-output-1
+  [plus 98 more lines, not shown]
+Failed test 100 input redirections (with limit of 50 open files)
+Test input:
+  /bin/cat < test/input.txt
+  /bin/cat < test/input.txt
+  /bin/cat < test/input.txt
+  /bin/cat < test/input.txt
+  /bin/cat < test/input.txt
+  [plus 96 more lines, not shown]
+Actual stdout:
+  > This is an example input file.
+  Which has multiple lines.
+  /bin/cat < test/input.txt exit status: 1
+  > This is an example input file.
+  Which has multiple lines.
+  [plus 128 more lines, not shown]
+Actual stderr:
+  cat: <: No such file or directory
+  cat: <: No such file or directory
+  cat: <: No such file or directory
+  cat: <: No such file or directory
+  cat: <: No such file or directory
+  [plus 40 more lines, not shown]
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*This is an example input file.
+  .*This is an example input file.
+  .*This is an example input file.
+  .*This is an example input file.
+  .*This is an example input file.
+  [plus 95 more lines, not shown]
+Expected stderr regular expression pattern:
+  <empty>
+(This test also has some important extra setup code that might do something like restrict the number of file descriptors or child processes that can be created.)
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*This is an example input file.] in ['Which has multiple lines.', '/bin/cat < test/input.txt exit status: 1', '> ']
+  in stderr: unexpected extra output [['cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory', 'cat: <: No such file or directory']]
+Failed test redirect stdin, then use other input (no arguments)
+Test input:
+  /bin/cat < test/input.txt
+  test/statfd0.sh
+  exit
+Actual stdout:
+  > This is an example input file.
+  Which has multiple lines.
+  /bin/cat < test/input.txt exit status: 1
+  > test/statfd0.sh exit status: 1
+  > 
+Actual stderr:
+  cat: <: No such file or directory
+  /usr/bin/stat: illegal option -- c
+  usage: stat [-FlLnqrsx] [-f format] [-t timefmt] [file ...]
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  > This is an example input file.
+  Which has multiple lines.
+  > fifo
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [> fifo] in ['/bin/cat < test/input.txt exit status: 1', '> test/statfd0.sh exit status: 1', '> ']
+  in stderr: unexpected extra output [['cat: <: No such file or directory', '/usr/bin/stat: illegal option -- c', 'usage: stat [-FlLnqrsx] [-f format] [-t timefmt] [file ...]']]
+Failed test redirect output (no arguments)
+Test input:
+  test/example_out.sh > test/redirect-stdout-output.txt
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  <empty>
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  error [Errno 13] Permission denied: 'test/redirect-stdout-output.txt' while reading test/redirect-stdout-output.txt
+Failed test redirect output then use normal output (no arguments)
+Test input:
+  test/sample_outputs.sh > test/redirect-stdout-output.txt
+  test/example_out.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  This is the contents of stderr.
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*foo bar baz
+Expected stderr regular expression pattern:
+  This is the contents of stderr.
+Errors:
+  in stdout: could not find match for pattern [.*foo bar baz] in ['> ']
+  error [Errno 13] Permission denied: 'test/redirect-stdout-output.txt' while reading test/redirect-stdout-output.txt
+Failed test redirect output truncates file (no arguments)
+Test input:
+  test/example_out.sh > test/redirect-stdout-output.txt
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  <empty>
+Expected stderr regular expression pattern:
+  <empty>
+(This test also has some important extra setup code that might do something like restrict the number of file descriptors or child processes that can be created.)
+Errors:
+  in created file test/redirect-stdout-output.txt: unexpected extra output [['test/example_out.sh > test/redirect-stdout-output.txt exit status: 0', '> ']]
+Failed test fork fails in a pipeline 
+Test input:
+  /bin/cat | /bin/cat | /bin/cat | /bin/cat
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  fork: Resource temporarily unavailable
+  
+Expected stdout regular expression pattern:
+  > > 
+Expected stderr regular expression pattern: (extra lines allowed)
+  .+
+(This test also has some important extra setup code that might do something like restrict the number of file descriptors or child processes that can be created.)
+Errors:
+  in stdout: could not find a match for pattern [> > ] in line [> ]
+  in stdout: could not find match for pattern [> > ] in ['> ']
+Failed test two command pipeline without arguments
+Test input:
+  test/example_out.sh | test/example_sed.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*foo XXX baz
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*foo XXX baz] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test two command pipeline without arguments, then use output
+Test input:
+  test/example_out.sh | test/example_sed.sh
+  test/example_out.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*foo XXX baz
+  .*foo bar baz
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*foo XXX baz] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test two command pipeline without arguments twice
+Test input:
+  test/example_out.sh | test/example_sed.sh
+  test/example_out.sh | test/example_sed2.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*foo XXX baz
+  .*foo bar YYY
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*foo XXX baz] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test three command pipeline without arguments (outputs)
+Test input:
+  test/example_out.sh | test/example_sed2.sh | test/example_sed.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*foo XXX YYY
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*foo XXX YYY] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test three command pipeline without arguments (status codes)
+Test input:
+  test/example_out.sh | test/example_sed2.sh | test/example_sed.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*test/example_out.sh.*exit status:.*0.*
+  .*test/example_sed2.sh.*exit status:.*0.*
+  .*test/example_sed.sh.*exit status:.*0.*
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*test/example_out.sh.*exit status:.*0.*] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test three command pipeline without arguments where order matters (1)
+Test input:
+  test/example_out.sh | test/example_sed2.sh | test/example_sed3.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*foo bar ZZZ
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*foo bar ZZZ] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test three command pipeline without arguments where order matters (2)
+Test input:
+  test/example_out.sh | test/example_sed3.sh | test/example_sed2.sh
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  <error output not available>
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*foo bar YYY
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*foo bar YYY] in ['> ']
+  in stderr: unexpected extra output [['<error output not available>']]
+Failed test |s without spaces is not a pipeline
+Test input:
+  /bin/echo this|argument|has|pipes
+  exit
+Actual stdout:
+  > > pipes exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  
+Expected stdout regular expression pattern:
+  > this\|argument\|has\|pipes
+  .*exit status: 0.*
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find a match for pattern [> this\|argument\|has\|pipes] in line [> > pipes exit status: 0]
+  in stdout: could not find a match for pattern [> this\|argument\|has\|pipes] in line [> ]
+  in stdout: could not find match for pattern [> this\|argument\|has\|pipes] in ['> > pipes exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory', 'No such file or directory']]
+Failed test |s without spaces mixed with | with spaces (output)
+Test input:
+  /bin/echo this|argument|has|pipes | /bin/sed -e s/argument/XXX/
+  exit
+Actual stdout:
+  > > /bin/sed -e s/argument/XXX/ exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*this\|XXX\|has\|pipes
+  > 
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [.*this\|XXX\|has\|pipes] in ['> > /bin/sed -e s/argument/XXX/ exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory']]
+Failed test |s without spaces mixed with | with spaces (exit statuses)
+Test input:
+  /bin/echo this|argument|has|pipes | /bin/sed -e s/argument/XXX/
+  exit
+Actual stdout:
+  > > /bin/sed -e s/argument/XXX/ exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*exit status: 0.*
+  .*exit status: 0.*
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory']]
+Failed test simple pipe output
+Test input:
+  /bin/echo testing  one two three | /bin/sed -e s/one/XXX/
+  exit
+Actual stdout:
+  > > /bin/sed -e s/one/XXX/ exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*testing XXX two three
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [.*testing XXX two three] in ['> > /bin/sed -e s/one/XXX/ exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test simple pipe exit status
+Test input:
+  /bin/echo testing one two three | /bin/sed -e s/one/XXX/
+  exit
+Actual stdout:
+  > > /bin/sed -e s/one/XXX/ exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*exit status: 0.*
+  .*exit status: 0.*
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  in stderr: unexpected extra output [['No such file or directory']]
+Failed test longer pipeline (output)
+Test input:
+  /bin/echo testing one two three | /bin/sed -e s/one/XXX/ | /bin/sed -e s/two/YYY/
+  exit
+Actual stdout:
+  > > /bin/sed -e s/two/YYY/ exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*testing XXX YYY three
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [.*testing XXX YYY three] in ['> > /bin/sed -e s/two/YYY/ exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory']]
+Failed test longer pipeline exit status (all 0s)
+Test input:
+  /bin/echo testing one two three | /bin/sed -e s/one/XXX/ | /bin/sed -e s/two/YYY/
+  exit
+Actual stdout:
+  > > /bin/sed -e s/two/YYY/ exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*exit status: 0.*
+  .*exit status: 0.*
+  .*exit status: 0.*
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [.*exit status: 0.*] in ['> ']
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory']]
+Failed test pipeline with two exit status 1s and one 0 has 1s
+Test input:
+  /bin/true ignored 1 | /bin/false ignored 2 | /bin/false ignored 3
+  exit
+Actual stdout:
+  > > /bin/false ignored 3 exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*exit status: 1.*
+  .*exit status: 1.*
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stdout: could not find match for pattern [.*exit status: 1.*] in ['> > /bin/false ignored 3 exit status: 0', '> ']
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory', 'No such file or directory']]
+Failed test pipeline with two exit status 1s and one 0 has 0
+Test input:
+  /bin/true some ignored arugments | /bin/false ignored argument | /bin/false more ignored argument
+  exit
+Actual stdout:
+  > > /bin/false more ignored argument exit status: 0
+  > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*exit status: 0.*
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory', 'No such file or directory']]
+Failed test 100 pipelines (with limit of 50 open files)
+Test input:
+  /bin/echo a test | /bin/sed -e s/test/xxx/
+  /bin/echo a test | /bin/sed -e s/test/xxx/
+  /bin/echo a test | /bin/sed -e s/test/xxx/
+  /bin/echo a test | /bin/sed -e s/test/xxx/
+  /bin/echo a test | /bin/sed -e s/test/xxx/
+  [plus 96 more lines, not shown]
+Actual stdout:
+  > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > 
+Actual stderr:
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  No such file or directory
+  [plus 34 more lines, not shown]
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*a xxx
+  .*a xxx
+  .*a xxx
+  .*a xxx
+  .*a xxx
+  [plus 95 more lines, not shown]
+Expected stderr regular expression pattern:
+  <empty>
+(This test also has some important extra setup code that might do something like restrict the number of file descriptors or child processes that can be created.)
+Errors:
+  timed out after 5 seconds
+  in stdout: could not find match for pattern [.*a xxx] in ['> > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > ']
+  in stderr: unexpected extra output [['No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory', 'No such file or directory']]
+Failed test large amount of data through pipe
+Test input:
+  /usr/bin/head -c 1M /dev/zero | /bin/cat | /usr/bin/wc -c
+  exit
+Actual stdout:
+  > 
+Actual stderr:
+  head: illegal byte count -- 1M
+  
+Expected stdout regular expression pattern: (extra lines allowed)
+  .*1048576.*
+Expected stderr regular expression pattern:
+  <empty>
+Errors:
+  timed out after 30 seconds
+  in stdout: could not find match for pattern [.*1048576.*] in ['> ']
+  in stderr: unexpected extra output [['head: illegal byte count -- 1M']]
+25 tests passed and 47 tests failed.
+---
+Note on interpreting test output patterns:
+All expected values matched against a "regular expression" where:
+    .* means any string (including empty strings)
+    .+ means any string (excluding empty strings)
+    everything is matched case-insensitively
+

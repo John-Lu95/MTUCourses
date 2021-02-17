@@ -1,0 +1,3 @@
+valuefrom63 > test/redirect-output-63
+/bin/echo valuefrom63 > test/redirect-output-63 exit status: 0
+> 
